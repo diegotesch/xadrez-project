@@ -1,5 +1,6 @@
 package xadrez.pecas;
 
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
@@ -15,9 +16,65 @@ public class Rei extends PecaXadrez {
         return "K";
     }
 
+    private boolean podeMover(Posicao posicao){
+        PecaXadrez p = (PecaXadrez) getTabuleiro().peca(posicao);
+        return p == null || p.getCor() != getCor();
+    }
+
     @Override
     public boolean[][] movimentosPossiveis() {
         boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+
+        Posicao p = new Posicao(0, 0);
+
+//        ACIMA
+        p.setValores(posicao.getLinha() - 1, posicao.getColuna());
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        ABAIXO
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna());
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        ESQUERDA
+        p.setValores(posicao.getLinha(), posicao.getColuna() - 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        DIREITA
+        p.setValores(posicao.getLinha(), posicao.getColuna() + 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        DIAGONAL SUPERIOR ESQUERDA
+        p.setValores(posicao.getLinha() -1, posicao.getColuna() - 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        DIAGONAL SUPERIOR DIREITA
+        p.setValores(posicao.getLinha() -1, posicao.getColuna() + 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        DIAGONAL INFERIOR ESQUERDA
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+//        DIAGONAL INFERIOR DIREITA
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
+        if(getTabuleiro().posicaoExiste(p) && podeMover(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
         return mat;
     }
 }
