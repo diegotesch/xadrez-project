@@ -54,7 +54,7 @@ public class Peao extends PecaXadrez {
             }
 
             p.setValores(posicao.getLinha() +2, posicao.getColuna());
-            Posicao p2 = new Posicao(posicao.getLinha() -1, posicao.getColuna());
+            Posicao p2 = new Posicao(posicao.getLinha() +1, posicao.getColuna());
             if(getTabuleiro().posicaoExiste(p) &&
                     !getTabuleiro().existeUmaPeca(p) &&
                     getTabuleiro().posicaoExiste(p2) &&
